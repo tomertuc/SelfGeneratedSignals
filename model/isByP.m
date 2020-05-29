@@ -1,10 +1,10 @@
-function [ ByP ] = isByP( n,SN,FN,A,RHO,ALPHA,N )
-%ISBYP Check if node infected by pure delivery
+function [ ByP ] = isByP( n,State,Transmit,A,RHO,ALPHA,N )
+%ISBYP Check if node activated by pure signal
 
     ByP = 0;
 
     for j=1:1:N
-        if FN(j)==1 && SN(j)==1 && A(n,j)==1 % firing, pure, neighbor
+        if Transmit(j)==1 && State(j)==1 && A(n,j)==1 % transmissing, pure, neighbor
             ByP=ThrowDices(RHO);
             
             if ByP==1

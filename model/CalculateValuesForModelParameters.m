@@ -52,16 +52,15 @@ if calc==1
     for s=1:1:SIMS_NO % simulation
         fprintf('Betha=%.6f, K=%.6f, Alpha=%.6f, P=%.6f, Q=%.6f: simulation %d of %d\n', Betha, K, ALPHA, P, Q, s, SIMS_NO);
 
-        SN=zeros(1,N);
-        UTN=zeros(1,N);
+        State=zeros(1,N);
         i=0;
-        while(length(find(SN)) < 0.95 * N) % iteration
+        while(length(find(State)) < 0.95 * N) % iteration
             i=i+1;
-            FN=calcFNbySN(SN,P,Q,N);
-            [SN,UTN]=getNSN(SN,UTN,FN,A,RHO,ALPHA,N,i);
+            Transmit=CalcTransmitByState(State,P,Q,N);
+            [State]=GetNextState(State,Transmit,A,RHO,ALPHA,N);
         end
         TimeToComplete(s) = i;
-        Pure(s) = CalcPureLevel(SN);
+        Pure(s) = CalcPureLevel(State);
 
         IterationsUntilNow = IterationsUntilNow + 1;
         CalcTimeEst( IterationsUntilNow, TOTAL_ITERATIONS );
