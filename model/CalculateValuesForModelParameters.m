@@ -42,7 +42,7 @@ if calc==1
     TimeToComplete = zeros(SIMS_NO,1);
     Pure = zeros(SIMS_NO,1);
     
-    % RHO calculation
+    % RHO calculation (trust factor)
     if (P==0 && Q==0)
         RHO=0;
     else
